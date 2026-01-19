@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ESP32 Controle</title>
+</head>
+<body>
+
+<h2>Login</h2>
+<input type="password" id="senha">
+<button onclick="login()">Entrar</button>
+
+<div id="painel" style="display:none">
+  <h2>Controle</h2>
+  <button onclick="toggle('b1')">Botão 1</button>
+  <button onclick="toggle('b2')">Botão 2</button>
+  <button onclick="toggle('b3')">Botão 3</button>
+</div>
+
+<script>
+const url = "https://novo-teste-esp32-default-rtdb.firebaseio.com/";
+
+function login() {
+  fetch(url + ".json")
+    .then(r => r.json())
+    .then(d => {
+      if (d.senha === document.getElementById("senha").value) {
+        document.getElementById("painel").style.display = "block";
+      } else {
+        alert("Senha incorreta");
+      }
+    });
+}
+
+function toggle(botao) {
+  fetch(url + botao + ".json", {
+    method: "PUT",
+    body: JSON.stringify(true)
+  });
+}
+</script>
+
+</body>
+</html>
