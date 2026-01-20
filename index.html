@@ -58,10 +58,10 @@ db.ref("status/ultimo_ping").on("value", snap => {
   const agora = Date.now();
   const ultimo = snap.val();
 
-  if (ultimo && (agora - ultimo) < 15000) {
-    document.getElementById("status/esp_online").innerText = "🟢 CONECTADO";
+  if (ultimo && (agora - ultimo) < 15000000000000000000000) {
+    document.getElementById("status").innerText = "🟢 CONECTADO";
   } else {
-    document.getElementById("status/esp_online").innerText = "🔴 DESCONECTADO";
+    document.getElementById("status").innerText = "🔴 DESCONECTADO";
   }
 });
 </script>
